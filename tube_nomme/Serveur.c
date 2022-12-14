@@ -35,9 +35,8 @@ while(1){
 
     /* Affichage du Question envoyé par le client */
     printf("\n****************** Question du Client numéro %d *****************\n",q.Num);
-    puts("\t     +------------------------------------------+");
-    printf("\t     | Veuillez me générer %d nombres aléatoires |\n",q.n);
-    puts("\t     +------------------------------------------+");
+    printf("\t      Veuillez me générer %d nombres aléatoires \n",q.n);
+
     
     /* construction de la réponse */
     rep.NumServeur=getpid();

@@ -35,9 +35,7 @@ close(t1);
 
 /* Affichage du Question du client */
 printf("\n****************************** Votre Question *******************************\n");
-puts("     +-------------------------------------------------------------------+");
-printf("     | Voici mon numéro: %d, Veuillez me générer %d nombres aléatoires |\n",q.Num,q.n);
-puts("     +-------------------------------------------------------------------+");
+printf("      Voici mon numéro: %d, Veuillez me générer %d nombres aléatoires \n",q.Num,q.n);
 
 /* Attente de la réponse */
 pause();
@@ -54,7 +52,7 @@ kill(rep.NumServeur,SIGUSR1);
 printf("\n********************* Réponse du Serveur numéro %d ************************\n\n",rep.NumServeur);
 printf("Les %d nombres aléatoires générés : \n\n ",nb);
 for(i=0;i<nb;i++){
-    printf("%d | ",rep.tab[i]);
+printf("             %d |",  rep.tab[i]);
 }
-printf("\n\n");
+printf("\n");
 }
