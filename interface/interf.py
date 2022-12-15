@@ -20,6 +20,7 @@ def client_tube(second_frame):
 def client_socket(gui2,e):
                 
    nb=int(e.get())   
+   #create new window
    gui3 = Toplevel(gui2)
    gui3.geometry("650x450")  
    # Add image file
