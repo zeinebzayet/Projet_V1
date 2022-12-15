@@ -14,6 +14,9 @@ int main(int argc, char const* argv[])
     // Creates a TCP socket id from IPV4 family
 	server_fd = socket(AF_INET, SOCK_STREAM, 0);
 
+	int s_pid=getpid();
+
+
 	// Error handling if socket id is not valid
 	if (server_fd < 0) {
 		printf("Error in connection.\n");
@@ -74,7 +77,7 @@ int main(int argc, char const* argv[])
 			printf("\t      Veuillez me générer %d nombres aléatoires \n",q.quest);
 			
 			/* Construction de la réponse */
-			r.pidserveur=getpid();
+			r.pidserveur=s_pid;
 			for(i=0;i<q.quest;i++){
 			r.rep[i] = rand() % (NMAX - 1) + 1;
 			}
