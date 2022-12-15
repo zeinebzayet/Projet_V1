@@ -15,7 +15,7 @@ int main(int argc, char const* argv[])
 		printf("Error in connection.\n");
 		exit(1);
 	}
-	printf("Client Socket is created.\n");
+	//printf("Client Socket is created.\n");
 
 	// Initializing socket structure with NULL
 	memset(&cliAddr, '\0', sizeof(cliAddr));
@@ -31,7 +31,7 @@ int main(int argc, char const* argv[])
 		exit(1);
 	}
 
-	printf("Connected to Server.\n");
+	//printf("Connected to Server.\n");
 
     /* initialisation du générateur de nombres aléatoires*/
     srand(getpid());
@@ -42,15 +42,18 @@ int main(int argc, char const* argv[])
     q.quest=nb;
 
     send(clientSocket, &q, sizeof(q), 0);
-    printf("Message sent\n");
+
+    /* Affichage du Question du client */
+    printf("\nVoici mon pid: %d, Veuillez me générer %d nombres aléatoires \n",q.pidc,q.quest);
 
     valread = read(clientSocket, &r, sizeof(r));
+
     /* Traitement local de la réponse */
     printf("\n********************* Réponse du Serveur numéro %d ************************\n\n",r.pidserveur);
     printf("Les %d nombres aléatoires générés : \n\n ",nb);
     for(i=0;i<nb;i++)
     {
-        printf("%d  ",r.rep[i]);
+        printf("%d |",r.rep[i]);
     }
     printf("\n");
 

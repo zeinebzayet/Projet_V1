@@ -10,12 +10,11 @@ int main(int argc, char const* argv[])
     int clientSocket;       // Client socket id
     socklen_t addr_size;   	// Stores byte size of server socket address
     pid_t childpid;  // Child process id
+	int s_pid=getpid();
+
 
     // Creates a TCP socket id from IPV4 family
 	server_fd = socket(AF_INET, SOCK_STREAM, 0);
-
-	int s_pid=getpid();
-
 
 	// Error handling if socket id is not valid
 	if (server_fd < 0) {
@@ -23,7 +22,7 @@ int main(int argc, char const* argv[])
 		exit(1);
 	}
 
-	printf("Server Socket is created.\n");
+	//printf("Server Socket is created.\n");
 
 	// Initializing address structure with NULL
 	memset(&serverAddr, '\0', sizeof(serverAddr));
@@ -83,7 +82,6 @@ int main(int argc, char const* argv[])
 			}
 
 			send(clientSocket, &r, sizeof(r), 0);
-			printf("message sent\n");
 		
 			close(clientSocket);  			// Close the client socket id
 
