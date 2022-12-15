@@ -5,15 +5,21 @@ import os
 import time
 
 
-def client_tube(second_frame):
-   Commande="\" ../tube_nomme/client >> ClientsTubeNomme.txt.txt; exec bash\""
+def client_tube(second_frame, gui2,frame, btn):
+   gui2.geometry("635x490")
+   btn.pack(ipady=0, ipadx=0,expand=False)
+   frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
+   Commande="\" ../tube_nomme/client >> ClientsTubeNomme.txt; exec bash\""
    subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande}",shell=True)
    time.sleep(3)
    f = open("ClientsTubeNomme.txt")
    lines=f.readlines()
    for line in lines:
       temp_text = line
-      Label(second_frame, text=temp_text).pack()
+      if temp_text[0] == "*":
+         Label(second_frame, text=temp_text, fg="#5c7d89", bg="#99bbc7",font= ('italic 11') ).pack()
+      else:     
+         Label(second_frame, text=temp_text, fg="Black", bg="#99bbc7",font= ('italic 11 bold') ).pack()
    f.close()
    os.remove("ClientsTubeNomme.txt")
 
@@ -44,7 +50,6 @@ def client_socket(gui2,e):
 
    # Create ANOTHER Frame INSIDE the Canvas
    second_frame = Frame(my_canvas,bg="#4a6f7c")  
-   #my_canvas.create_image((0,0), image=bg, anchor="nw")
    my_canvas.create_window((0,0), window=second_frame, anchor="nw")  
 
    
@@ -65,11 +70,16 @@ def client_socket(gui2,e):
 
 def sel():
    if v.get()=="Tube":
+      Commande1="\" ../tube_nomme/server; exec bash\""
+      subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande1}",shell=True)
       gui2 = Toplevel(gui)
-      gui2.geometry("650x450")
+      gui2.geometry("500x400")
+      bg = PhotoImage(file = "img.png")
+      label1 = Label( gui2, image = bg)
+      label1.place(x = 0, y = 0)
 
       frame = Frame(gui2)
-      frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
+      #frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
       # Create A Canvas
       my_canvas = Canvas(frame)
       my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
@@ -83,16 +93,13 @@ def sel():
       my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion = my_canvas.bbox("all")))
 
       # Create ANOTHER Frame INSIDE the Canvas
-      second_frame = Frame(my_canvas)
+      second_frame = Frame(my_canvas, bg="#99bbc7")
 
       # Add that New frame To a Window In The Canvas
       my_canvas.create_window((0,0), window=second_frame, anchor="nw")
-
-      Commande1="\" ../tube_nomme/server; exec bash\""
-      subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande1}",shell=True)     
-
-      btn = Button(gui2, text ="Lancer un Client",command=lambda:client_tube(second_frame))
-      btn.pack()
+            
+      btn = Button(gui2,background= "#99bbc7", text ="Lancer un Client",command=lambda:client_tube(second_frame, gui2, frame, btn), padx=33,pady=13, font=('italic 11 bold'))
+      btn.pack(ipady=5, ipadx=5,expand=True)
       gui2.mainloop()
       
    if v.get()=="Sockets":
@@ -125,6 +132,5 @@ v.set(None)
 r1 = Radiobutton(gui, text=" Tube Nommé",bg="#4a6f7c", variable=v, value="Tube", command=sel).place(anchor=CENTER, relx=.5, rely=.4)
 r2 = Radiobutton(gui, text=" Sockets : TCP",bg="#4a6f7c" ,variable=v, value="Sockets", command=sel).place(anchor=CENTER, relx=.5, rely=.5)
 
-#label = Label(gui)
-#label.pack()
+
 gui.mainloop()
