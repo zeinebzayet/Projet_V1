@@ -27,7 +27,7 @@ def client_tube(second_frame, gui2,frame, btn):
 def client_socket(gui2,e):
                 
    nb=int(e.get())
-   if nb>=1 and nb<=15:
+   if nb>=1 and nb<=10:
       #create new window
       gui3 = Toplevel(gui2)
       gui3.geometry("650x490")  
@@ -62,7 +62,6 @@ def client_socket(gui2,e):
       subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande}",shell=True)
       time.sleep(3)
       f = open("ClientsSockets.txt")
-      #Label(second_frame, text="Client "+str(i+1),bg="#99bbc7",fg="#760523",font= ('Helvetica 15 bold underline')).pack()
       lines=f.readlines()
       for line in lines:
          temp_text = line
@@ -74,7 +73,7 @@ def client_socket(gui2,e):
       os.remove("ClientsSockets.txt")
       gui3.mainloop() 
    else:
-      messagebox.showerror("Error","Le nombre de clients doit être entre 1 et 15")   
+      messagebox.showerror("Error","Le nombre de clients doit être entre 1 et 10")   
 
 def sel():
    if v.get()=="Tube":

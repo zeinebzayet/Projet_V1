@@ -51,6 +51,9 @@ while(1){
     sleep(1);
     kill(q.Num,SIGUSR1);
 
+    /* Attente de la terminaison de la lecture de la reponse de la part du client */
+    pause();
+
     }
 close(t1);
 close(t2);

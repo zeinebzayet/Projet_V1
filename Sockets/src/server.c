@@ -12,7 +12,6 @@ int main(int argc, char const* argv[])
     pid_t childpid;  // Child process id
 	int s_pid=getpid();
 
-
     // Creates a TCP socket id from IPV4 family
 	server_fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -24,16 +23,13 @@ int main(int argc, char const* argv[])
 
 	//printf("Server Socket is created.\n");
 
-	// Initializing address structure with NULL
-	memset(&serverAddr, '\0', sizeof(serverAddr));
-
 	// Assign port number and IP address to the socket created
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(PORT);
 	serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-        // Binding the socket id with the socket structure
-	if (bind(server_fd, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {    	// Error handling
+    // Binding the socket id with the socket structure
+	if (bind(server_fd, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
 		printf("Error in binding.\n");
 		exit(1);
 	}
@@ -81,14 +77,10 @@ int main(int argc, char const* argv[])
 			r.rep[i] = rand() % (NMAX - 1) + 1;
 			}
 
-			send(clientSocket, &r, sizeof(r), 0);
-		
-			close(clientSocket);  			// Close the client socket id
+			send(clientSocket, &r, sizeof(r), 0);			
 
-	    		}
-		}
-
-	    // closing the listening socket
-    shutdown(server_fd, SHUT_RDWR);
+	    }
+	}
+    close(clientSocket);  
     return 0;
 }

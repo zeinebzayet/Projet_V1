@@ -2,12 +2,10 @@
  
 int main(int argc, char const* argv[])
 {
-    int sock = 0, valread, nb,i;
+    int valread, nb,i,clientSocket;
     struct sockaddr_in serv_addr;
-    struct sockaddr_in cliAddr;   /* Client socket structure */
     struct question q;
     struct reponse r;
-    int clientSocket;  	// Socket id
 
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);  	// Creating socket id
 
@@ -16,9 +14,6 @@ int main(int argc, char const* argv[])
 		exit(1);
 	}
 	//printf("Client Socket is created.\n");
-
-	// Initializing socket structure with NULL
-	memset(&cliAddr, '\0', sizeof(cliAddr));
 
 	// Assigning port number and IP address
 	serv_addr.sin_family = AF_INET;
@@ -58,5 +53,6 @@ int main(int argc, char const* argv[])
     printf("\n");
 
     close(clientSocket);  /* closing the connected socket */
+
     return 0;
 }
