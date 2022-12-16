@@ -10,7 +10,7 @@ def client_tube(second_frame, gui2,frame, btn):
    gui2.geometry("635x490")
    btn.pack(ipady=0, ipadx=0,expand=False)
    frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
-   Commande="\" ../tube_nomme/executables/client >> ClientsTubeNomme.txt; exec bash\""
+   Commande="\" tube_nomme/executables/Client >> ClientsTubeNomme.txt; exec bash\""
    subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande}",shell=True)
    time.sleep(3)
    f = open("ClientsTubeNomme.txt")
@@ -32,7 +32,7 @@ def client_socket(gui2,e):
       gui3 = Toplevel(gui2)
       gui3.geometry("650x490")  
       # Add image file
-      bg = PhotoImage(file = "img.png")
+      bg = PhotoImage(file = "interface/img.png")
       label1 = Label( gui3, image = bg)
       label1.place(x = 0, y = 0)
 
@@ -54,9 +54,9 @@ def client_socket(gui2,e):
       second_frame = Frame(my_canvas,bg="#99bbc7")  
       my_canvas.create_window((0,0), window=second_frame, anchor="nw")  
 
-      Commande="\" ../Sockets/executables/client >> ClientsSockets.txt"      
+      Commande="\" Sockets/executables/client >> ClientsSockets.txt"      
       for i in range(nb-1):
-         Commande = Commande + " & ../Sockets/executables/client >> ClientsSockets.txt"
+         Commande = Commande + " & Sockets/executables/client >> ClientsSockets.txt"
       Commande = Commande + "; exec bash\""
          
       subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande}",shell=True)
@@ -78,16 +78,15 @@ def client_socket(gui2,e):
 
 def sel():
    if v.get()=="Tube":
-      Commande1="\" ../tube_nomme/executables/server; exec bash\""
+      Commande1="\" tube_nomme/executables/Serveur; exec bash\""
       subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande1}",shell=True)
       gui2 = Toplevel(gui)
       gui2.geometry("500x400")
-      bg = PhotoImage(file = "img.png")
+      bg = PhotoImage(file = "interface/img.png")
       label1 = Label( gui2, image = bg)
       label1.place(x = 0, y = 0)
 
       frame = Frame(gui2)
-      #frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
       # Create A Canvas
       my_canvas = Canvas(frame)
       my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
@@ -113,14 +112,14 @@ def sel():
    if v.get()=="Sockets":
       gui2 = Toplevel(gui)
       gui2.geometry("650x450")
-      bg = PhotoImage(file = "img.png")
+      bg = PhotoImage(file = "interface/img.png")
       label1 = Label( gui2, image = bg)
       label1.place(x = 0, y = 0)
    
       l = Label(gui2, text = "Veuillez entrer le nombre de clients que vous désirez l'exécuter",bg="#4a6f7c",font= ('Helvetica 13 bold')).place(relx=.5, rely=.3,anchor= CENTER)
       e = Entry(gui2, bd = 5)
       e.pack(pady= 155)
-      Commande1="\" ../Sockets/executables/server; exec bash\""
+      Commande1="\" Sockets/executables/server; exec bash\""
       subprocess.Popen(f"gnome-terminal --tab -- bash -c {Commande1}",shell=True)
       btn = Button(gui2, text ="Lancer",bg="#99bbc7",font= ('Helvetica 12 bold'),command=lambda:client_socket(gui2,e)).place(anchor=CENTER, relx=.5, rely=.5)
       gui2.mainloop()
@@ -129,7 +128,7 @@ gui = Tk()
 
 gui.title('Application Client_Serveur')
 gui.geometry("500x400")
-bg = PhotoImage(file = "img.png")
+bg = PhotoImage(file = "interface/img.png")
 label1 = Label( gui, image = bg)
 label1.place(x = 0, y = 0)
 label = Label(gui, text="Bienvenue ! Veuillez cocher votre choix",bg="#4a6f7c",font= ('Helvetica 12 bold')).place(relx=.5, rely=.3,anchor= CENTER)

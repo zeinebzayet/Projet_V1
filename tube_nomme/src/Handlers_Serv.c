@@ -1,4 +1,6 @@
 #include "Handlers_Serv.h"
+#include "serv_cli_fifo.h"
+
 
 void hand_reveil (int sig){
     printf("\n*********************** Signal numéro %d reçu **********************\n",sig);

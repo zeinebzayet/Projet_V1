@@ -1,3 +1,5 @@
+#ifndef DEF_SERV_CLI
+#define DEF_SERV_CLI
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <string.h>
@@ -22,3 +24,6 @@ struct reponse
 int pidserveur; /* pid du serveur */
 int rep[NMAX]; /* reponse du seveur */
 };
+
+
+#endif
